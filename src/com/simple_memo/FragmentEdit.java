@@ -62,36 +62,7 @@ public class FragmentEdit extends Fragment
 		 {
 			 if (v == tv_back)
 			 {
-				 String str_content = Common.trimSpecified(edit_text.getText().toString(), "\n\r ");
-				 String str_full = Common.trimSpecified(Common.memo_to_edit.content_full, "\n\r ");
-				 
-				 if (! str_full.equals(str_content))
-				 {
-					 Common.memo_to_edit.content_full = str_content;
-					 Common.memo_to_edit.content_short = MemoItem.getShortFromFull(str_content);
-					 Common.memo_to_edit.date_update = Common.getCurrentDateTime();				 
-					 String filepath = Common.PathDirDetail + "/" + Common.memo_to_edit.getFilenameForDetails();
-					 
-					 if (! Common.memo_to_edit.flag_new)
-					 {
-						 Common.list_memo_all.remove(Common.posi_in_list_memo_all);
-						 
-						 if (str_content.length() > 0)
-						 {
-							 Common.list_memo_all.add(Common.memo_to_edit);							 
-							 Common.memo_to_edit.writeToFile(filepath);
-						 }
-						 else
-						 {
-							 Common.removeFile(filepath);
-						 }
-					 }
-					 else if (str_content.length() > 0)
-					 {
-						 Common.list_memo_all.add(Common.memo_to_edit);
-						 Common.memo_to_edit.writeToFile(filepath);
-					 }
-				 }
+				 saveTextEdited();
 				 
 				 //
 				 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -101,6 +72,48 @@ public class FragmentEdit extends Fragment
 		 }// onClick
 	}
 	//ClickEvent
+	
+	//
+	public boolean saveTextEdited()
+	{
+		String str_content = Common.trimSpecified(edit_text.getText().toString(), "\n\r ");
+		String str_full = Common.trimSpecified(Common.memo_to_edit.content_full, "\n\r ");
+		 
+		if (! str_full.equals(str_content))
+		{
+			Common.memo_to_edit.content_full = str_content;
+			Common.memo_to_edit.content_short = MemoItem.getShortFromFull(str_content);
+			Common.memo_to_edit.date_update = Common.getCurrentDateTime();				 
+			String filepath = Common.PathDirDetail + "/" + Common.memo_to_edit.getFilenameForDetails();
+			
+			if (! Common.memo_to_edit.flag_new)
+			{
+				Common.list_memo_all.remove(Common.posi_in_list_memo_all);
+			
+			    if (str_content.length() > 0)
+			    {
+			    	Common.list_memo_all.add(Common.memo_to_edit);							 
+					Common.memo_to_edit.writeToFile(filepath);
+				}
+				else
+				{
+					Common.removeFile(filepath);
+			    }
+			}
+			else if (str_content.length() > 0)
+			{
+				Common.list_memo_all.add(Common.memo_to_edit);
+				Common.memo_to_edit.writeToFile(filepath);
+			}
+			
+			// not same, saved
+			return true;
+		}
+		
+		// same, need not to save
+		return false;
+	}
+	//
 	
 }
 

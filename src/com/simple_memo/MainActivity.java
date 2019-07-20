@@ -2,9 +2,9 @@ package com.simple_memo;
 
 import java.io.File;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -12,7 +12,6 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
-import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity
 {	
@@ -77,47 +76,41 @@ public class MainActivity extends FragmentActivity
     
     //
     // 处理返回键
-    private long exitTime = 0;
+    // private long exitTime = 0;
  	public boolean onKeyDown(int keyCode, KeyEvent event)
  	{
  		if (keyCode == KeyEvent.KEYCODE_BACK)
  		{
- 			backToHome();
+ 			processKeyEventBack();
  			return false;
  		}
  		else if (keyCode == KeyEvent.KEYCODE_MENU)
  		{
- 			return true;  // 表示处理过了
+ 			return true;  // 表示需要处理
  		}
  		//
  		return super.onKeyDown(keyCode, event);
  	}
  	//
- 	public void backToHome()
+ 	public void processKeyEventBack()
     {
-    	if ((System.currentTimeMillis() - exitTime) > 2000)
-    	{
-    		Toast.makeText(getApplicationContext(),
-    				"再按一次返回桌面",
-    				Toast.LENGTH_SHORT).show();
-    		exitTime = System.currentTimeMillis();
-    	}
-    	else
-    	{
-    		//
-     		Common.writeMemoAllToFile();
-     		Common.SystemFinish();
-     		//
-     		// 返回home
-     		Intent home = new Intent(Intent.ACTION_MAIN);
-     		home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            home.addCategory(Intent.CATEGORY_HOME);
-            startActivity(home);
-            //
-    		//finish();
-    		//System.exit(0);
-    		//
-    	}
+ 		FragmentManager fragmentManager = getSupportFragmentManager();
+ 		Fragment current = fragmentManager.findFragmentById(R.id.id_content);
+ 		//
+ 		if (current != null && current instanceof FragmentEdit)
+ 		{
+ 			boolean flag_save = ((FragmentEdit) current).saveTextEdited();
+ 			//
+ 			if (flag_save)
+ 			{
+ 				Common.writeMemoAllToFile();
+ 				Common.SystemFinish();
+ 			}
+ 	 		//
+ 		}
+ 		// 		
+		fragmentManager.popBackStack();
+		//
     }
 	//
  	
