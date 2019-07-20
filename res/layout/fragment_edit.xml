@@ -17,10 +17,10 @@
 	        android:id="@+id/edit_tv_back_symbol"
 	        android:layout_width="13dp"
 	        android:layout_height="fill_parent"
-	        android:layout_marginTop="-3dp"
+	        android:layout_marginTop="0dp"
 	        android:gravity="center|left"
 	        android:textColor="#FF8B2500" 
-	        android:textSize="18sp"/>
+	        android:textSize="19sp"/>
 
         <TextView
 	        android:id="@+id/edit_tv_back"

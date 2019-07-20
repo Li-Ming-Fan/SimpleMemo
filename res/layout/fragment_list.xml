@@ -14,7 +14,7 @@
         android:layout_height="36dp"        
         android:gravity="center|right"
         android:textColor="#FF8B2500" 
-        android:textSize="17sp"/>
+        android:textSize="16sp"/>
     
     <View
         android:layout_width="fill_parent"
