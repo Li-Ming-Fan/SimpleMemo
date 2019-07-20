@@ -47,7 +47,7 @@ public class FragmentEdit extends Fragment
     		
 		//
     	edit_text = (EditText) mView.findViewById(R.id.edit_edittext);
-    	edit_text.setText(Common.memo_to_edit.content_full);
+    	edit_text.setText(Common.memo_to_edit.content_full + "\n\n\n\n\n\n\n\n\n\n");
     	
 
         return mView;

@@ -20,7 +20,7 @@ public class MemoItem
 	{
 		date_create = "";
 		date_update = "";
-		content_full = "\n\n\n\n\n\n\n\n\n\n";
+		content_full = "";
 		content_short = "";
 		
 		flag_new = true;
