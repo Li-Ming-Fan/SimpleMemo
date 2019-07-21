@@ -16,7 +16,7 @@
         android:id="@+id/memo_item_date"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginRight="16dp"
         android:gravity="center|right" 
         android:textSize="17sp" />
 

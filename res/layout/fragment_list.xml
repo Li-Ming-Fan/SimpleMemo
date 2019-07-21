@@ -12,7 +12,7 @@
         android:id="@+id/list_tv_create"
         android:layout_width="fill_parent"
         android:layout_height="36dp"
-        android:layout_marginRight="8dp" 
+        android:layout_marginRight="14dp" 
         android:gravity="center|right"
         android:textColor="#FF8B2500" 
         android:textSize="17sp"/>
