@@ -154,11 +154,22 @@ public class Common
 		return curr_datetime;
 	}
 	//
-	
 	public static String trimSpecified(String text, String trim_chars)
 	{
 		int posi_left = 0;
-		int posi_right = text.length() - 1;
+		int posi_right = text.length();
+		
+		while (posi_right > posi_left)
+		{
+			if (trim_chars.contains(text.subSequence(posi_right - 1, posi_right)))
+			{
+				posi_right--;
+			}
+			else
+			{
+				break;
+			}
+		}
 		
 		while (posi_left < posi_right)
 		{
@@ -172,20 +183,9 @@ public class Common
 			}
 		}
 		
-		while (posi_right > posi_left)
-		{
-			if (trim_chars.contains(text.subSequence(posi_right, posi_right + 1)))
-			{
-				posi_right--;	
-			}
-			else
-			{
-				break;
-			}
-		}
-		
-		return text.substring(posi_left, posi_right + 1);
+		return text.substring(posi_left, posi_right);
 	
 	}
+	//
 
 }
